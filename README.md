@@ -5,7 +5,7 @@ Problems in Computer Science
 # Build
 ```bash
 mvn compile
-java -cp target/classes com.study.Solution
+java -cp target/classes study.tree.BinarySearchTree
 
 
 python src/main/python/solution.py

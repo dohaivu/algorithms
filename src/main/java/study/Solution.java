@@ -1,4 +1,4 @@
-package com.study;
+package study;
 import java.io.*;
 import java.text.NumberFormat;
 import java.util.*;
@@ -39,7 +39,7 @@ public class Solution {
             b[b_i] = a[i];
         }
         ;
-NumberFormat.getCurrencyInstance(new Locale("en_IN");
+
         Arrays.stream(b).forEach(s -> System.out.print(s + " "));
     }
 
