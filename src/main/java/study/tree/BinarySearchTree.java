@@ -5,31 +5,31 @@ import java.util.*;
 public class BinarySearchTree {
 
     public static void main(String[] args) {
-        TreeNode tree = new TreeNode();
+        Node tree = new Node();
         int[] inputs = new int[] {1, 3, 2, 5, 4, 6, 7};
         for (int i = 0; i < inputs.length; i++) {
             insert(tree, inputs[i]);
         }
 
         System.out.print("Height: " + maxHeight(tree));
-        printTree(tree);
+
     }
 
-    static class TreeNode {
-        public int value;
-        public TreeNode leftNode;
-        public TreeNode rightNode;
+    static class Node {
+        public int data;
+        public Node left;
+        public Node right;
 
-        public TreeNode() {}
+        public Node() {}
     }
 
-    public static void insert(TreeNode root, int data) {
-        TreeNode tempNode = new TreeNode();
-        tempNode.value = data;
-        tempNode.leftNode = null;
-        tempNode.rightNode = null;
+    public static void insert(Node root, int data) {
+        Node tempNode = new Node();
+        tempNode.data = data;
+        tempNode.left = null;
+        tempNode.right = null;
 
-        TreeNode current, parent;
+        Node current, parent;
 
         if (root == null) {
             root = tempNode;
@@ -39,17 +39,17 @@ public class BinarySearchTree {
 
             while(true) {
                 parent = current;
-                if (data < parent.value) {
-                    current = parent.leftNode;
+                if (data < parent.data) {
+                    current = parent.left;
                     if (current == null) {
-                        parent.leftNode = tempNode;
+                        parent.left = tempNode;
                         return;
                     }
 
                 } else {
-                    current = parent.rightNode;
+                    current = parent.right;
                     if (current == null) {
-                        parent.rightNode = tempNode;
+                        parent.right = tempNode;
                         return;
                     }
                 }
@@ -57,23 +57,35 @@ public class BinarySearchTree {
         }
     }
 
-    public static int maxHeight(TreeNode node) {
+    public static int maxHeight(Node node) {
         if (node == null) return 0;
-        int leftHeight = maxHeight(node.leftNode);
-        int rightHeight = maxHeight(node.rightNode);
+        int leftHeight = maxHeight(node.left);
+        int rightHeight = maxHeight(node.right);
         if (leftHeight > rightHeight)
             return 1 + leftHeight;
         else
             return 1 + rightHeight;
     }
-    public static void printTree(TreeNode node) {
+    public static void printTree(Node node) {
         if (node == null) {
             return;
         }
 
-        printTree(node.leftNode);
-        printTree(node.rightNode);
-        System.out.println(node.value);
+        printTree(node.left);
+        printTree(node.right);
+        System.out.println(node.data);
     }
 
+    public static boolean checkBST(Node root) {
+	    return check(root,Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    public static boolean check(Node n, int min, int max){
+        if(n==null)
+            return true;
+        if(n.data <= min || n.data >= max)
+            return false;
+        return check(n.left, min, n.data)
+            && check(n.right, n.data, max);
+    }
 }
