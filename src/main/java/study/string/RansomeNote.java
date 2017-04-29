@@ -34,8 +34,6 @@ import java.text.*;
 import java.math.*;
 import java.util.regex.*;
 
-import study.Solution;
-
 public class RansomeNote {
 
     public static void main(String[] args) {
