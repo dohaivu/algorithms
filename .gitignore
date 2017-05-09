@@ -1,5 +1,13 @@
-.idea
-.settings
-target
-
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+/.idea/*
+.DS_Store
+**/build
+**/target
+**/bin
+/captures
 *.iml
+gradle.properties
+.settings

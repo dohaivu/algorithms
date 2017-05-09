@@ -1,0 +1,33 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+
+    }
+}
+
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'study'
+version '1.0-SNAPSHOT'
+
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile "io.reactivex.rxjava2:rxjava:2.1.0"
+}
+
+mainClassName = 'study.rx.TestRx'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.5'
+}
