@@ -8,6 +8,8 @@ package study.array;
  * and summed to produce an entry of C.
  */
 
+import study.Utils;
+
 class Matrices {
 
     public static int[][] Multiply(int[][] multiplicand, int[][] multiplier) throws Exception{
@@ -54,6 +56,8 @@ class Matrices {
                 System.out.println("C[" + i + "][" + j + "] = " + C[i][j]);
             }
         }
+
+        Utils.printMatrix(C);
     }
 
 }
