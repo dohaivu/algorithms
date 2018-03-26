@@ -29,25 +29,23 @@ compileTestJava {
     options.compilerArgs += '-parameters'
 }
 
-// test {
-// 	useJUnitPlatform {
-// 		// includeEngines 'junit-jupiter', 'junit-vintage'
-// 		// excludeEngines 'custom-engine'
+test {
+	useJUnitPlatform {
+		// includeEngines 'junit-jupiter', 'junit-vintage'
+		// excludeEngines 'custom-engine'
 
-// 		// includeTags 'fast'
-// 		excludeTags 'slow'
-// 	}
+		// includeTags 'fast'
+		excludeTags 'slow'
+	}
 
-// 	testLogging {
-// 		events 'passed', 'skipped', 'failed'
-// 	}
+	testLogging {
+		events 'passed', 'skipped', 'failed'
+	}
 
-// 	reports {
-// 		html.enabled = true
-// 	}
-
-// 	if (javaVersion < 10) finalizedBy jacocoTestReport
-// }
+	reports {
+		html.enabled = true
+	}
+}
 
 dependencies {
     compile "io.reactivex.rxjava2:rxjava:2.1.0"
