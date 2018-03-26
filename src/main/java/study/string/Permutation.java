@@ -4,7 +4,11 @@ import java.util.Scanner;
 
 /*
     1.2 Given two string, write a method to check if one is permutation of the other
+    Ex:
+    abc - bac -> true
+    abc - cde -> false
 
+    Use an array[128] hold ascii characters, count the number of char apperance
     Hint: check Space, Case Sensitive
     O(n), S(1)
  */
@@ -30,5 +34,7 @@ public class Permutation {
         String a = in.nextLine();
         String b = in.nextLine();
         System.out.println(checkPermutation(a, b));
+
+        in.close();
     }
 }
