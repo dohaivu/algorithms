@@ -8,8 +8,10 @@
             "type": "java",
             "name": "Debug (Launch)",
             "request": "launch",
-            "mainClass": "study.string.Pangrams",
-            "args": ""
+            "mainClass": "study.string.IsUnique",
+            "args": "",
+            "stopOnEntry": false,
+            "console": "integratedTerminal"
         },
         {
             "type": "java",
