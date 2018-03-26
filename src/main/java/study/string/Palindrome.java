@@ -1,17 +1,22 @@
 package study.string;
-// A palindrome is a word which reads the same backward as forward, such as 'madam' or 'racecar'.
 
+
+/**
+ * A palindrome is a word which reads the same backward as forward
+ * ex: 'madam' or 'racecar'.
+ * - Input
+ * madam
+ * - Output
+ * true
+ *
+ * Use 2 index: forward and backward
+ * O(n/2)
+ */
 public class Palindrome {
 
     public static boolean isPalindrome(String wordString) {
 
         boolean isPalindrome = true;
-
-        // This text editor is recording as you type.
-        // Write your code here, in this text editor, without copy-pasting,
-        // so that we can follow your process.
-        // Consider handling invalid input parameters.
-        // PLEASE DO NOT USE BUILT IN STRING FUNCTIONS!
 
         if (wordString == null || wordString.length() == 0) return false;
         if (wordString.length() == 1) return true;
