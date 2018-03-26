@@ -5,9 +5,22 @@ import java.util.Scanner;
 /*
 1.5 There are three types of edits that can be performed on strings: insert a character, remove a character, or replace a character.
 Given two strings, write a function to check if they are one edit (or zero edits) away
+Ex:
+pale, ple -> true
+pales, pale -> true
+pale, bale -> true
+pale, bake -> false
  */
 public class OneAway {
     public static boolean checkOneAway(String a, String b) {
+        if (a.isEmpty() && b.isEmpty()) return true;
+        if (a.isEmpty())
+            if (b.length() == 1) return true;
+            else return false;
+        if (b.isEmpty())
+            if (a.length() == 1) return true;
+            else return false;
+
         if (Math.abs(a.length() - b.length()) > 1) return false;
 
         int i = 0;
@@ -31,6 +44,8 @@ public class OneAway {
             }
 
             if (count >= 2) return false;
+            if (i == a.length() && j < b.length() && count == 1) return false;
+            if (i < a.length() && j == b.length() && count == 1) return false;
             if (i == a.length() || j == b.length()) break;
         }
 
@@ -43,5 +58,7 @@ public class OneAway {
         String a = in.nextLine();
         String b = in.nextLine();
         System.out.println(checkOneAway(a, b));
+
+        in.close();
     }
 }

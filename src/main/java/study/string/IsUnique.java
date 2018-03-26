@@ -11,8 +11,9 @@ import java.util.Scanner;
     false
     true
     - Explanation
+    first string contains duplicate a
 
-    Use array hold the appearance of characters
+    Use array<bool> hold the appearance of characters
     O(n)
  */
 public class IsUnique {

@@ -1,11 +1,6 @@
 package study.string;
 
-import java.io.*;
-import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
-import java.util.stream.*;
+import java.util.Scanner;
 
 public class Pangrams {
     public static void main(String[] args) {
