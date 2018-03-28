@@ -1,6 +1,4 @@
 package study.tree;
-import java.io.*;
-import java.util.*;
 
 public class BinarySearchTree {
 
@@ -13,14 +11,8 @@ public class BinarySearchTree {
 
         System.out.print("Height: " + maxHeight(tree));
 
-    }
+        printTree(tree);
 
-    static class Node {
-        public int data;
-        public Node left;
-        public Node right;
-
-        public Node() {}
     }
 
     public static void insert(Node root, int data) {
@@ -66,6 +58,7 @@ public class BinarySearchTree {
         else
             return 1 + rightHeight;
     }
+
     public static void printTree(Node node) {
         if (node == null) {
             return;
