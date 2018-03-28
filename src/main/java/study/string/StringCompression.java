@@ -7,6 +7,10 @@ import java.util.Scanner;
 For example, the string aabcccccaaa would become a2blc5a3.
 If the "compressed" string would not become smaller than the original string, your method should return the original string.
 You can assume the string has only uppercase and lowercase letters (a - z).
+
+Use an array to hold new value. An counter to count character
+Loop  and compare the current char with the next, then increase, reset the counter.
+O(n), S(2n)
  */
 public class StringCompression {
     public static String compressString(String a) {
@@ -30,5 +34,7 @@ public class StringCompression {
         Scanner in = new Scanner(System.in);
         String a = in.nextLine();
         System.out.println(compressString(a));
+
+        in.close();
     }
 }

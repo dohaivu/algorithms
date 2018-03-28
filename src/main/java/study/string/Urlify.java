@@ -5,6 +5,8 @@ import java.util.Scanner;
 /*
     1.3 urlify a string, replace spaces with %20
 
+    An array[4x] to hold new String
+    Loop and check space
     Hint: check Space, Case Sensitive
     O(n), S(n)
  */
@@ -28,5 +30,7 @@ public class Urlify {
         Scanner in = new Scanner(System.in);
         String a = in.nextLine();
         System.out.println(urlify(a, a.length()));
+
+        in.close();
     }
 }
