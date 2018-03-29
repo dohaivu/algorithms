@@ -1,5 +1,6 @@
 package study.array;
 
+import java.util.HashSet;
 import java.util.Scanner;
 
 import study.Utils;
@@ -7,7 +8,8 @@ import study.Utils;
 /**
 1.8 Write an algorithm such that if an element in an MxN matrix is 0, its entire row and column are set to 0.
 
-O(n*m), S(n*m)
+Find the row, col that has zero. Then loop again to zero the row, col
+O(2*n*m), S(n*m)
  */
 public class ZeroMatrix {
     public static void main(String[] args) {
@@ -15,7 +17,7 @@ public class ZeroMatrix {
 
         int[][] A = new int[][] {
             { 7, 8, 9 },
-            { 10, 11, 12 },
+            { 10, 0, 12 },
             { 1, 2, 3 }
         };
 
@@ -28,20 +30,31 @@ public class ZeroMatrix {
     }
 
     public static boolean zeroMatrix(int[][] a) {
-        if (a.length == 0 || a.length != a[0].length) return false;
+        if (a.length == 0 || a[0].length == 0) return false;
 
         int n = a.length;
-        for (int layer = 0; layer < n/2; layer++) {
-            int first = layer;
-            int last = n - 1 - layer;
+        int m = a[0].length;
 
-            for (int i = first; i < last; i++) {
-                int offset = i - first;
-                int top = a[first][i];
-                a[first][i] = a[last-offset][first];
-                a[last-offset][first] = a[last][last-offset];
-                a[last][last-offset] = a[i][last];
-                a[i][last] = top;
+        // find zero, loop entire matrix
+        HashSet<Integer> rows = new HashSet<Integer>();
+        HashSet<Integer> cols = new HashSet<Integer>();
+
+        for (int row = 0; row < n; row++) {
+            for (int col = 0; col < m; col++) {
+                if (a[row][col] == 0) {
+                    rows.add(row);
+                    cols.add(col);
+                    System.out.println(String.format("%s %s", row, col));
+                }
+            }
+        }
+
+        // loop again to zero row, col
+        for (int row = 0; row < n; row++) {
+            for (int col = 0; col < m; col++) {
+                if (rows.contains(row) || cols.contains(col)) {
+                    a[row][col] = 0;
+                }
             }
         }
 
