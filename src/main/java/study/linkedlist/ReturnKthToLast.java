@@ -1,6 +1,5 @@
 package study.linkedlist;
 
-import java.util.HashSet;
 import java.util.Scanner;
 
 /**
@@ -13,8 +12,8 @@ import java.util.Scanner;
 - Explanation
 Return 1st node from the last
 
-Solution
-O(n*n), S(n)
+Solution: recursive and 2 pointer
+
  */
 public class ReturnKthToLast {
     public static void main(String[] args) {
