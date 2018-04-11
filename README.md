@@ -11,6 +11,8 @@ javac -d target/classes src/main/java/study/Warmup.java
 
 # dependency
 javac -d target/classes src/main/java/study/Utils.java src/main/java/study/array/RotateMatrix.java
+javac -d target/classes src/main/java/study/*.java src/main/java/study/tree/*.java
 
 python src/main/python/solution.py
 ```
+

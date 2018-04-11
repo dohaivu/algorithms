@@ -1,25 +1,29 @@
 package study.tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BinarySearchTree {
 
     public static void main(String[] args) {
-        Node tree = new Node();
-        int[] inputs = new int[] {1, 3, 2, 5, 4, 6, 7};
+        Node tree = null;
+        int[] inputs = new int[] { 4, 3, 2, 5, 1, 6, 7 };
         for (int i = 0; i < inputs.length; i++) {
-            insert(tree, inputs[i]);
+            tree = insertRecursive(tree, inputs[i]);
         }
 
-        System.out.print("Height: " + maxHeight(tree));
+        BTreePrinter.printNode(tree);
 
-        printTree(tree);
+        printLevel(tree, 3);
 
+        System.out.println();
+
+        // System.out.print("Height: " + maxHeight(tree));
     }
 
-    public static void insert(Node root, int data) {
-        Node tempNode = new Node();
-        tempNode.data = data;
-        tempNode.left = null;
-        tempNode.right = null;
+    // use loop
+    public static Node insert(Node root, int value) {
+        Node tempNode = new Node(value);
 
         Node current, parent;
 
@@ -29,28 +33,73 @@ public class BinarySearchTree {
             current = root;
             parent = null;
 
-            while(true) {
+            while (true) {
                 parent = current;
-                if (data < parent.data) {
+                if (value < parent.data) {
                     current = parent.left;
                     if (current == null) {
                         parent.left = tempNode;
-                        return;
+                        break;
                     }
 
                 } else {
                     current = parent.right;
                     if (current == null) {
                         parent.right = tempNode;
-                        return;
+                        break;
                     }
                 }
             }
         }
+
+        return root;
+    }
+
+    // use recursive
+    public static Node insertRecursive(Node root, int value) {
+        if (root == null) {
+            return new Node(value);
+        } else {
+            Node cur;
+            if (value <= root.data) {
+                cur = insertRecursive(root.left, value);
+                root.left = cur;
+            } else {
+                cur = insertRecursive(root.right, value);
+                root.right = cur;
+            }
+            return root;
+        }
+    }
+
+    public static void inOrderTraversal(Node node) {
+        if (node != null) {
+            inOrderTraversal(node.left);
+            System.out.print(node.data + " ");
+            inOrderTraversal(node.right);
+        }
+    }
+
+    public static void preOrderTraversal(Node node) {
+        if (node != null) {
+            System.out.print(node.data + " ");
+            preOrderTraversal(node.left);
+            preOrderTraversal(node.right);
+        }
+    }
+
+    public static void postOrderTraversal(Node node) {
+        if (node != null) {
+            postOrderTraversal(node.left);
+            postOrderTraversal(node.right);
+            System.out.print(node.data + " ");
+        }
     }
 
     public static int maxHeight(Node node) {
-        if (node == null) return 0;
+        if (node == null)
+            return -1;
+
         int leftHeight = maxHeight(node.left);
         int rightHeight = maxHeight(node.right);
         if (leftHeight > rightHeight)
@@ -64,21 +113,81 @@ public class BinarySearchTree {
             return;
         }
 
+        System.out.println(node.data);
         printTree(node.left);
         printTree(node.right);
-        System.out.println(node.data);
     }
 
+    // check whether tree is BST, if left < node < right
     public static boolean checkBST(Node root) {
-	    return check(root,Integer.MIN_VALUE, Integer.MAX_VALUE);
+        return check(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
-    public static boolean check(Node n, int min, int max){
-        if(n==null)
+    public static boolean check(Node n, int min, int max) {
+        if (n == null)
             return true;
-        if(n.data <= min || n.data >= max)
+        if (n.data <= min || n.data >= max)
             return false;
-        return check(n.left, min, n.data)
-            && check(n.right, n.data, max);
+        return check(n.left, min, n.data) && check(n.right, n.data, max);
+    }
+
+    // print top view left to right
+    public static void topView(Node root) {
+        topViewLeft(root);
+        topViewRight(root.right);
+    }
+
+    public static void topViewLeft(Node root) {
+        if (root == null)
+            return;
+        topViewLeft(root.left);
+        System.out.print(root.data + " ");
+    }
+
+    public static void topViewRight(Node root) {
+        if (root == null)
+            return;
+        System.out.print(root.data + " ");
+        topViewRight(root.right);
+    }
+
+    // print node by level
+    public static void levelOrder(Node root) {
+        Queue<Node> queue = new LinkedList<Node>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            Node n = queue.poll();
+            System.out.print(n.data + " ");
+            if (n.left != null) queue.add(n.left);
+            if (n.right != null) queue.add(n.right);
+        }
+    }
+
+    // print level
+    public static void printLevel(Node root, int level) {
+        Queue<Node> queue = new LinkedList<Node>();
+        Queue<Integer> levelQ = new LinkedList<>();
+
+        queue.add(root);
+        levelQ.add(1);
+
+        while (!queue.isEmpty()) {
+            Node n = queue.poll();
+            Integer l = levelQ.poll();
+            if (l == level) {
+                System.out.print(n.data + " ");
+            } else {
+                l++;
+                if (n.left != null) {
+                    queue.add(n.left);
+                    levelQ.add(l);
+                }
+                if (n.right != null) {
+                    queue.add(n.right);
+                    levelQ.add(l);
+                }
+            }
+        }
     }
 }
