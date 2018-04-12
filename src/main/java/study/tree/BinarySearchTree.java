@@ -7,14 +7,15 @@ public class BinarySearchTree {
 
     public static void main(String[] args) {
         Node tree = null;
-        int[] inputs = new int[] { 4, 3, 2, 5, 1, 6, 7 };
+        int[] inputs = new int[] { 4, 2, 1, 3, 8, 6, 7, 9 };
         for (int i = 0; i < inputs.length; i++) {
             tree = insertRecursive(tree, inputs[i]);
         }
 
         BTreePrinter.printNode(tree);
 
-        printLevel(tree, 3);
+        // printLevel(tree, 3);
+        System.out.println(lca(tree, 6, 7).data);
 
         System.out.println();
 
@@ -189,5 +190,17 @@ public class BinarySearchTree {
                 }
             }
         }
+    }
+
+    // Lowest Common Ancestor
+    public static Node lca(Node root,int v1,int v2) {
+
+        if (root.data < v1 && root.data < v2) {
+            return lca(root.right, v1, v2);
+        } else if (root.data > v1 && root.data > v2) {
+            return lca(root.left, v1, v2);
+        }
+
+        return root;
     }
 }
