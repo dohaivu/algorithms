@@ -1,5 +1,6 @@
 package study.tree;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -12,7 +13,7 @@ public class BinarySearchTree {
             tree = insertRecursive(tree, inputs[i]);
         }
 
-        BTreePrinter.printNode(tree);
+        // BTreePrinter.printNode(tree);
 
         // printLevel(tree, 3);
         System.out.println(lca(tree, 6, 7).data);
@@ -20,6 +21,8 @@ public class BinarySearchTree {
         System.out.println();
 
         // System.out.print("Height: " + maxHeight(tree));
+
+        BTreePrinter.printNode(createMinimalBST(new int[]{1, 2, 3, 4, 5, 6, 7, 8}));
     }
 
     // use loop
@@ -202,5 +205,56 @@ public class BinarySearchTree {
         }
 
         return root;
+    }
+
+    /**
+     4.2 Minimal Tree: Given a sorted (increasing order) array with unique integer elements, write an algorithm to create a binary search tree with minimal height.
+
+     Use recursive left, right
+     */
+    public static Node createMinimalBST(int[] array) {
+        return createMinimalBST(array, 0, array.length - 1);
+    }
+
+    public static Node createMinimalBST(int[] array, int start, int end) {
+        if (end < start) {
+            return null;
+        }
+
+        int mid = (end + start)/2;
+        Node n = new Node(array[mid]);
+        n.left = createMinimalBST(array, start, mid - 1);
+        n.right = createMinimalBST(array, mid + 1, end);
+
+        return n;
+    }
+
+    /**
+    4.3 List of Depths: Given a binary tree, design an algorithm which creates a linked list of all the nodes at each depth (e.g., if you have a tree with depth D, you'll have D linked lists).
+
+    -> use parameter to track level.
+     */
+    public static ArrayList<LinkedList<Node>> createLevelLinkedList(Node root) {
+        ArrayList<LinkedList<Node>> lists = new ArrayList<>();
+        createLevelLinkedList(root, lists, 0);
+
+        return lists;
+    }
+    public static void createLevelLinkedList(Node root, ArrayList<LinkedList<Node>> lists, int level) {
+        if (root == null) return;
+
+        LinkedList<Node> list = null;
+        if (lists.size() == level) {
+            list = new LinkedList<>();
+            lists.add(list);
+        } else {
+            list = lists.get(level);
+
+        }
+        list.add(root);
+
+        createLevelLinkedList(root.left, lists, level + 1);
+        createLevelLinkedList(root.right, lists, level + 1);
+
     }
 }
